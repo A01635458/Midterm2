@@ -1,5 +1,4 @@
-# main.py
-# Main entry. Runs the whole system.
+#main.py
 
 import os
 import sys
@@ -28,7 +27,7 @@ def main():
         labels_path="data/labels.json"
     )
 
-    print("=== Emotion-Aware Lyric Search Engine ===")
+    print("------Emotion-Aware Lyric Search Engine----")
 
     engine.load_lyrics()
 
@@ -43,7 +42,7 @@ def main():
     print(f"Optimization time: {end - start:.4f}s")
     engine.compute_counts()
 
-    # List emotions
+    #lista de emociones
     emotions = list(engine.graph.emotion_to_words.keys())
 
     print("\n[3] Ranking songs for ALL emotions")
@@ -51,12 +50,12 @@ def main():
     plots_dir = "results/plots"
     os.makedirs(plots_dir, exist_ok=True)
 
-    # save + print ranking
+    #guardar y print
     with open("results/scores.txt", "w", encoding="utf-8") as f:
 
         for emotion in emotions:
-            print(f"\n--- Emotion: {emotion.upper()} ---")
-            f.write(f"\n=== {emotion.upper()} ===\n")
+            print(f"\n Emotion: {emotion.upper()}")
+            f.write(f"\n {emotion.upper()} \n")
 
             results = engine.score(emotion)
 
@@ -67,20 +66,19 @@ def main():
 
     print("\n[4] Generating plots...")
 
-    # load emotions dict
     with open("data/emotions.json") as f:
         emotions_dict = json.load(f)
 
-    # SA cost curve
+    #SA cost curve
     plot_sa_curve(engine.optimizer.history, plots_dir)
 
-    # emotion word counts
+    #emotion word counts
     plot_emotion_counts(emotions_dict, "data/lyrics", plots_dir)
 
-    # emotion heatmap
+    #emotion heatmap
     plot_heatmap(emotions_dict, "data/lyrics", plots_dir)
 
-    # top10 per emotion
+    #top10 por emotion
     plot_top10(engine, emotions_dict, plots_dir)
 
     print("\nAll plots saved in results/plots/")
