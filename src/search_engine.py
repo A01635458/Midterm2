@@ -17,9 +17,12 @@ class SearchEngine:
         self.lyrics_dir = lyrics_dir
         self.graph = EmotionalGraph(emotions_path)
         self.labels_path = labels_path
+
         self.songs: Dict[str, str] = {}
         self.trie = Trie()
+
         self.word_counts: Dict[str, Dict[str, int]] = {}
+        self.optimizer: SimulatedAnnealingOptimizer | None = None   # <-- NEW
 
     def load_lyrics(self) -> None:
         files = sorted(glob.glob(os.path.join(self.lyrics_dir, "song*.txt")))
@@ -44,9 +47,20 @@ class SearchEngine:
         for song, txt in self.songs.items():
             self.word_counts[song] = self._count_words(txt.lower())
 
-    def optimize(self) -> None:
-        SA = SimulatedAnnealingOptimizer(self.graph, self.word_counts, self.labels_path)
-        SA.optimize()
+    # ⭐ FIXED — SA now stored in self.optimizer
+    def optimize(self, max_iters=6000):
+        # ensure counts are ready
+        if not self.word_counts:
+            self.compute_counts()
+
+        # create and store optimizer
+        self.optimizer = SimulatedAnnealingOptimizer(
+            self.graph,
+            self.word_counts,
+            self.labels_path
+        )
+
+        return self.optimizer.optimize(max_iters=max_iters)
 
     def score(self, emotion: str) -> List[Tuple[str, float, int]]:
         ranked = []

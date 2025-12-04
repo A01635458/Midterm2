@@ -1,29 +1,60 @@
-song13.txt	13.6275	9
-song2.txt	4.6258	3
-song6.txt	4.3436	5
-song7.txt	3.0839	2
-song25.txt	1.5419	1
-song9.txt	1.5419	1
-song15.txt	1.4147	2
-song27.txt	1.4147	2
-song11.txt	1.0768	1
-song5.txt	1.0768	1
-song12.txt	0.7074	1
-song20.txt	0.7074	1
-song1.txt	0.0000	0
-song10.txt	0.0000	0
-song14.txt	0.0000	0
-song17.txt	0.0000	0
-song18.txt	0.0000	0
-song19.txt	0.0000	0
-song21.txt	0.0000	0
-song22.txt	0.0000	0
-song23.txt	0.0000	0
-song24.txt	0.0000	0
-song26.txt	0.0000	0
-song28.txt	0.0000	0
-song29.txt	0.0000	0
-song3.txt	0.0000	0
-song30.txt	0.0000	0
-song4.txt	0.0000	0
-song8.txt	0.0000	0
+
+=== HAPPINESS ===
+1. song2.txt | score=50.843 | matches=31
+2. song1.txt | score=18.538 | matches=25
+3. song28.txt | score=9.165 | matches=18
+4. song3.txt | score=7.948 | matches=6
+5. song26.txt | score=7.293 | matches=7
+6. song23.txt | score=6.072 | matches=4
+7. song25.txt | score=5.496 | matches=19
+8. song21.txt | score=5.106 | matches=3
+9. song10.txt | score=4.075 | matches=7
+10. song24.txt | score=3.903 | matches=9
+
+=== SADNESS ===
+1. song6.txt | score=12.217 | matches=10
+2. song21.txt | score=10.732 | matches=4
+3. song15.txt | score=8.940 | matches=8
+4. song19.txt | score=6.834 | matches=18
+5. song7.txt | score=6.574 | matches=4
+6. song26.txt | score=6.536 | matches=6
+7. song1.txt | score=6.376 | matches=12
+8. song10.txt | score=6.368 | matches=6
+9. song17.txt | score=5.831 | matches=7
+10. song30.txt | score=3.959 | matches=5
+
+=== NOSTALGIA ===
+1. song13.txt | score=16.138 | matches=9
+2. song17.txt | score=8.086 | matches=12
+3. song15.txt | score=7.909 | matches=19
+4. song6.txt | score=6.975 | matches=11
+5. song27.txt | score=5.346 | matches=12
+6. song23.txt | score=5.328 | matches=12
+7. song20.txt | score=3.436 | matches=8
+8. song21.txt | score=3.411 | matches=4
+9. song11.txt | score=3.361 | matches=4
+10. song9.txt | score=3.019 | matches=7
+
+=== ANGER ===
+1. song21.txt | score=13.187 | matches=12
+2. song10.txt | score=5.992 | matches=6
+3. song6.txt | score=4.225 | matches=5
+4. song15.txt | score=3.981 | matches=5
+5. song22.txt | score=3.975 | matches=4
+6. song11.txt | score=3.867 | matches=2
+7. song3.txt | score=3.867 | matches=2
+8. song5.txt | score=3.262 | matches=21
+9. song24.txt | score=3.090 | matches=2
+10. song4.txt | score=2.985 | matches=3
+
+=== LOVE ===
+1. song25.txt | score=29.289 | matches=27
+2. song3.txt | score=23.591 | matches=50
+3. song2.txt | score=21.610 | matches=40
+4. song1.txt | score=15.639 | matches=19
+5. song15.txt | score=15.570 | matches=28
+6. song27.txt | score=14.678 | matches=32
+7. song28.txt | score=11.746 | matches=8
+8. song26.txt | score=7.361 | matches=11
+9. song23.txt | score=6.104 | matches=8
+10. song6.txt | score=5.986 | matches=12

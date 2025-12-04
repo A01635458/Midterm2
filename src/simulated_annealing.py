@@ -1,5 +1,5 @@
 # simulated_annealing.py
-# Simple SA optimizer for emotional weights.
+# Improved SA optimizer with soft cost function and history logging.
 
 import os
 import json
@@ -14,6 +14,7 @@ class SimulatedAnnealingOptimizer:
         self.graph = graph
         self.song_counts = song_counts
         self.labels = self._load_labels(labels_path)
+        self.history = []  # <-- NEW: record cost over time
 
     def _load_labels(self, path: str) -> Dict[str, str]:
         if os.path.exists(path):
@@ -26,38 +27,54 @@ class SimulatedAnnealingOptimizer:
         scores = self.graph.score_counts_all(counts)
         return max(scores.items(), key=lambda x: x[1])[0]
 
+    # ⭐ NEW COST FUNCTION (soft, learnable)
     def _cost(self) -> float:
         if not self.labels:
-            # Dummy cost: lower cost = higher total score
-            total = 0
+            # Dummy cost if no labels exist
+            cost = 0.0
             for counts in self.song_counts.values():
-                for e in self.graph.get_emotions():
-                    total += self.graph.score_counts_for_emotion(e, counts)
-            return -total
+                scores = self.graph.score_counts_all(counts)
+                cost += sum(scores.values()) * -1
+            return cost
 
-        errors = 0
+        total_cost = 0.0
+
         for song, counts in self.song_counts.items():
-            if song in self.labels:
-                if self._predict(counts) != self.labels[song]:
-                    errors += 1
-        return float(errors)
+            if song not in self.labels:
+                continue
+
+            correct = self.labels[song]
+            scores = self.graph.score_counts_all(counts)
+
+            correct_score = scores.get(correct, 0.0)
+            max_other = max(v for k, v in scores.items() if k != correct)
+
+            # Soft margin-based error
+            error = max_other - correct_score
+            if error > 0:
+                total_cost += error  # bigger gap = worse
+
+        return total_cost
 
     def _perturb(self) -> List[Tuple[str, str, float]]:
+        """Modify 4 random word weights slightly."""
         changes = []
-        for _ in range(3):
+        for _ in range(4):
             e = random.choice(self.graph.get_emotions())
             w = random.choice(self.graph.get_words_for_emotion(e))
             old = self.graph.get_weight(e, w)
-            new = max(0.0, old + random.uniform(-0.3, 0.3))
+            new = max(0.0, old + random.uniform(-0.4, 0.4))
             self.graph.set_weight(e, w, new)
             changes.append((e, w, old))
         return changes
 
     def _undo(self, changes: List[Tuple[str, str, float]]) -> None:
+        """Restore old weights when move is rejected."""
         for e, w, old in changes:
             self.graph.set_weight(e, w, old)
 
-    def optimize(self, max_iters: int = 200) -> Tuple[float, float]:
+    # ⭐ Higher iters, improved learning
+    def optimize(self, max_iters: int = 6000) -> Tuple[float, float]:
         temp = 5.0
         cost = self._cost()
         best = cost
@@ -72,6 +89,10 @@ class SimulatedAnnealingOptimizer:
             new_cost = self._cost()
             delta = new_cost - cost
 
+            # record history
+            self.history.append(cost)
+
+            # Accept move?
             if delta < 0 or random.random() < math.exp(-delta / temp):
                 cost = new_cost
                 if new_cost < best:
@@ -79,7 +100,8 @@ class SimulatedAnnealingOptimizer:
             else:
                 self._undo(changes)
 
-            temp *= 0.97
+            # Cooling schedule
+            temp *= 0.995  # slower cooling = better learning
 
         print(f"[SA] Final cost: {best:.4f}")
         return cost, best

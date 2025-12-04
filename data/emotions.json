@@ -1,30 +1,33 @@
 {
   "happiness": [
-    "happy",
-    "sunshine",
-    "smile",
-    "feel"
+    "happy", "sunshine", "smile", "laugh", "joy", "bright", "alive", "glad", "light",
+    "free", "fun", "dancing", "cheer", "shine", "beautiful", "paradise", "wonderful",
+    "amazing", "sweet", "hope", "warm", "kind", "better", "glow", "dancing", "energy",
+    "vibe", "alright", "okay", "fine", "golden", "blessed", "smiling"
   ],
   "sadness": [
-    "tears",
-    "sad",
-    "broken",
-    "hurt"
+    "tears", "crying", "cry", "sad", "lonely", "broken", "hurt", "pain", "blue", "dark",
+    "empty", "cold", "lost", "falling", "bleeding", "gone", "sorrow", "regret", "aching",
+    "apart", "buried", "hopeless", "down", "fear", "fail", "dying", "missing",
+    "shadow", "hurtful", "misery", "alone", "shattered", "weak", "fade"
   ],
   "nostalgia": [
-    "remember",
-    "yesterday",
-    "again",
-    "miss"
+    "remember", "yesterday", "again", "miss", "memory", "memories", "old", "past", "back",
+    "home", "before", "longing", "yearning", "faded", "dreaming", "gone", "echo", "once",
+    "return", "remind", "holding", "childhood", "linger", "rewind", "backwards", "still",
+    "forevermore", "ago", "distant", "looking", "flashback"
   ],
   "anger": [
-    "hate",
-    "fight"
+    "hate", "fight", "rage", "mad", "shout", "burn", "bleed", "enemy", "war", "screaming",
+    "breaking", "destroy", "furious", "revenge", "anger", "explode", "violence", "storm",
+    "wild", "sharp", "crash", "slam", "wreck", "punch", "tearing", "ruin", "shatter", "agony",
+    "rage", "blame", "furious", "damn", "damage", "rough"
   ],
   "love": [
-    "love",
-    "heart",
-    "baby",
-    "forever"
+    "love", "heart", "baby", "forever", "kiss", "touch", "feel", "desire", "darling",
+    "sweetheart", "need", "want", "hold", "mine", "lips", "beautiful", "together", "romance",
+    "care", "trust", "devoted", "passion", "soulmate", "hug", "promise", "belong",
+    "touching", "warmth", "cherish", "falling", "dream", "stay", "keep", "closer", "near",
+    "hand", "arms", "calling", "only"
   ]
 }

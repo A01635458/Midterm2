@@ -40,4 +40,4 @@ if __name__ == "__main__":
     test_kmp_basic()
     test_kmp_no_match()
     test_kmp_single_match()
-    print("🎉 ALL KMP TESTS PASSED")
+    print("ALL KMP TESTS PASSED")

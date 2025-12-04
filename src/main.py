@@ -11,6 +11,15 @@ if CURRENT not in sys.path:
 
 from search_engine import SearchEngine
 
+from plotter import (
+    plot_sa_curve,
+    plot_emotion_counts,
+    plot_heatmap,
+    plot_top10
+)
+
+import json
+
 
 def main():
     engine = SearchEngine(
@@ -32,20 +41,50 @@ def main():
     engine.optimize()
     end = time.perf_counter()
     print(f"Optimization time: {end - start:.4f}s")
+    engine.compute_counts()
 
-    target = "nostalgia"
-    print(f"\n[3] Ranking songs for emotion: '{target}'")
-    results = engine.score(target)
+    # List emotions
+    emotions = list(engine.graph.emotion_to_words.keys())
 
-    for i, (song, score, matches) in enumerate(results[:10]):
-        print(f"{i+1}. {song} | score={score:.3f} | matches={matches}")
-
+    print("\n[3] Ranking songs for ALL emotions")
     os.makedirs("results", exist_ok=True)
-    with open("results/scores.txt", "w", encoding="utf-8") as f:
-        for (song, score, matches) in results:
-            f.write(f"{song}\t{score:.4f}\t{matches}\n")
+    plots_dir = "results/plots"
+    os.makedirs(plots_dir, exist_ok=True)
 
-    print("\nScores saved to results/scores.txt")
+    # save + print ranking
+    with open("results/scores.txt", "w", encoding="utf-8") as f:
+
+        for emotion in emotions:
+            print(f"\n--- Emotion: {emotion.upper()} ---")
+            f.write(f"\n=== {emotion.upper()} ===\n")
+
+            results = engine.score(emotion)
+
+            for i, (song, score, matches) in enumerate(results[:10], start=1):
+                line = f"{i}. {song} | score={score:.3f} | matches={matches}"
+                print(line)
+                f.write(line + "\n")
+
+    print("\n[4] Generating plots...")
+
+    # load emotions dict
+    with open("data/emotions.json") as f:
+        emotions_dict = json.load(f)
+
+    # SA cost curve
+    plot_sa_curve(engine.optimizer.history, plots_dir)
+
+    # emotion word counts
+    plot_emotion_counts(emotions_dict, "data/lyrics", plots_dir)
+
+    # emotion heatmap
+    plot_heatmap(emotions_dict, "data/lyrics", plots_dir)
+
+    # top10 per emotion
+    plot_top10(engine, emotions_dict, plots_dir)
+
+    print("\nAll plots saved in results/plots/")
+    print("Done.")
 
 
 if __name__ == "__main__":
