@@ -133,7 +133,7 @@ benchmark_kmp.py
 /data
 /lyrics/song1.txt ... song30.txt
 emotions.json
-labels.json (optional for optimization)
+labels.json
 
 /results
 scores.txt

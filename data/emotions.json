@@ -1,0 +1,30 @@
+{
+  "happiness": [
+    "happy",
+    "sunshine",
+    "smile",
+    "feel"
+  ],
+  "sadness": [
+    "tears",
+    "sad",
+    "broken",
+    "hurt"
+  ],
+  "nostalgia": [
+    "remember",
+    "yesterday",
+    "again",
+    "miss"
+  ],
+  "anger": [
+    "hate",
+    "fight"
+  ],
+  "love": [
+    "love",
+    "heart",
+    "baby",
+    "forever"
+  ]
+}
