@@ -45,4 +45,4 @@ def test_annealing_runs():
 
 if __name__ == "__main__":
     test_annealing_runs()
-    print(" ALL ANNEALING TESTS PASSED")
+    print("ALL ANNEALING TESTS PASSED")

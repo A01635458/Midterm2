@@ -47,4 +47,4 @@ def test_graph_weights_change():
 if __name__ == "__main__":
     test_graph_scoring()
     test_graph_weights_change()
-    print("🎉 ALL EMOTIONAL GRAPH TESTS PASSED")
+    print("ALL EMOTIONAL GRAPH TESTS PASSED")

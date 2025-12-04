@@ -1,5 +1,5 @@
-# emotional_graph.py
-# Stores emotional words with weights.
+#emotional_graph.py
+#guarda palabras de emociones con peso
 
 import json
 import os

@@ -14,7 +14,7 @@ class SimulatedAnnealingOptimizer:
         self.graph = graph
         self.song_counts = song_counts
         self.labels = self._load_labels(labels_path)
-        self.history = []  # <-- NEW: record cost over time
+        self.history = []  
 
     def _load_labels(self, path: str) -> Dict[str, str]:
         if os.path.exists(path):
@@ -27,10 +27,8 @@ class SimulatedAnnealingOptimizer:
         scores = self.graph.score_counts_all(counts)
         return max(scores.items(), key=lambda x: x[1])[0]
 
-    # ⭐ NEW COST FUNCTION (soft, learnable)
     def _cost(self) -> float:
         if not self.labels:
-            # Dummy cost if no labels exist
             cost = 0.0
             for counts in self.song_counts.values():
                 scores = self.graph.score_counts_all(counts)
@@ -57,7 +55,6 @@ class SimulatedAnnealingOptimizer:
         return total_cost
 
     def _perturb(self) -> List[Tuple[str, str, float]]:
-        """Modify 4 random word weights slightly."""
         changes = []
         for _ in range(4):
             e = random.choice(self.graph.get_emotions())
@@ -69,11 +66,9 @@ class SimulatedAnnealingOptimizer:
         return changes
 
     def _undo(self, changes: List[Tuple[str, str, float]]) -> None:
-        """Restore old weights when move is rejected."""
         for e, w, old in changes:
             self.graph.set_weight(e, w, old)
 
-    # ⭐ Higher iters, improved learning
     def optimize(self, max_iters: int = 6000) -> Tuple[float, float]:
         temp = 5.0
         cost = self._cost()
@@ -89,10 +84,10 @@ class SimulatedAnnealingOptimizer:
             new_cost = self._cost()
             delta = new_cost - cost
 
-            # record history
+            #record history
             self.history.append(cost)
 
-            # Accept move?
+            #Accept move?
             if delta < 0 or random.random() < math.exp(-delta / temp):
                 cost = new_cost
                 if new_cost < best:
@@ -100,7 +95,7 @@ class SimulatedAnnealingOptimizer:
             else:
                 self._undo(changes)
 
-            # Cooling schedule
+            #Cooling schedule
             temp *= 0.995  # slower cooling = better learning
 
         print(f"[SA] Final cost: {best:.4f}")

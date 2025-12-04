@@ -47,7 +47,7 @@ class SearchEngine:
         for song, txt in self.songs.items():
             self.word_counts[song] = self._count_words(txt.lower())
 
-    # ⭐ FIXED — SA now stored in self.optimizer
+
     def optimize(self, max_iters=6000):
         # ensure counts are ready
         if not self.word_counts:

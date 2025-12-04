@@ -1,13 +1,10 @@
-# kmp.py
-# Simple KMP implementation for pattern searching.
+#kmp.py
+#kmp para bsqueda simple
 
 from typing import List
 
 
 def build_lps(pattern: str) -> List[int]:
-    """
-    Build Longest Prefix Suffix (LPS) array for KMP.
-    """
     lps = [0] * len(pattern)
     length = 0
     i = 1
@@ -28,9 +25,6 @@ def build_lps(pattern: str) -> List[int]:
 
 
 def kmp_search(pattern: str, text: str) -> List[int]:
-    """
-    Return all starting positions where pattern appears in text.
-    """
     if not pattern or not text:
         return []
 
